@@ -1,0 +1,43 @@
+function checkCashRegister(price, cash, cid) {
+  let cidTotal = 0;
+  let change = cash - price;
+  const answer = [];
+  for (let elem of cid) {
+    cidTotal += elem[1];
+  }
+  cidTotal = cidTotal.toFixed(2);
+  if (change > cidTotal) {
+    return { status: "INSUFFICIENT_FUNDS", change: answer };
+  } else if (change.toFixed(2) === cidTotal) {
+    return { status: "CLOSED", change: cid };
+  } else {
+    cid = cid.reverse();
+     let currencyUnits = {
+  "PENNY": .01,
+  "NICKEL": .05,
+  "DIME": .10,
+  "QUARTER": .25,
+  "ONE": 1.00,
+  "FIVE": 5.00,
+  "TEN": 10.00,
+  "TWENTY": 20.00,
+  "ONE HUNDRED": 100.00
+}
+    for (let elem of cid) {
+      let status = [elem[0], 0];
+      while (change >= currencyUnits[elem[0]] && elem[1] > 0) {
+        change -= currencyUnits[elem[0]];
+        change = change.toFixed(2);
+        status[1] += currencyUnits[elem[0]];
+        elem[1] -= currencyUnits[elem[0]];
+      }
+      if (status[1] > 0) {
+        answer.push(status);
+      }
+    }
+  }
+  if (change > 0) {
+    return { status: "INSUFFICIENT_FUNDS", change: [] };
+  }
+  return { status: "OPEN", change: answer};
+}
