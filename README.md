@@ -1,2 +1,2 @@
-# freecodecamp-projects
-project for freecodecamp certficate
+# freecodecamp-javaScript-projects
+project for freecodecamp javaScript certficate
